@@ -8,29 +8,30 @@
 </head>
 <body>
 <div class="calculator">
-  <input type="text" class="display" id="display" disabled>
+  <!--<input type="text" class="display" id="display" disabled>-->
+  <input type="text" class="display" id="display" value="0" readonly />
   <div class="buttons">
     <button >C</button>
     <button >X</button>
-    <button >%</button>
-    <button >/</button>
+    <button id="percentageButton">%</button>
+    <button id="divideButton">/</button>
     <button id="sevenButton" >7</button>
-    <button >8</button>
-    <button >9</button>
-    <button >*</button>
+    <button id="eightButton">8</button>
+    <button id="nineButton">9</button>
+    <button id="multiplyButton">*</button>
 
-    <button >4</button>
-    <button >5</button>
-    <button >6</button>
-    <button >-</button>
+    <button id="fourButton">4</button>
+    <button id="fiveButton">5</button>
+    <button id="sixButton">6</button>
+    <button id="minusButon">-</button>
 
-    <button >1</button>
-    <button >2</button>
-    <button >3</button>
-    <button >+</button>
+    <button id="oneButton">1</button>
+    <button id="twoButton">2</button>
+    <button id="threeButton">3</button>
+    <button id="addButton">+</button>
 
-    <button >0</button>
-    <button >.</button>
+    <button id="decimalButton">.</button>
+    <button id="zeroButton">0</button>
     <button class="equal">=</button>
 
     <!--<button onclick="clearDisplay()" class="clear" style="grid-column: span 4;">C</button>-->
