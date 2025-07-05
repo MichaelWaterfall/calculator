@@ -1,3 +1,11 @@
+header {
+    padding: 16px 16px;
+    background-color: rgba(34, 34, 46, 0.604);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 body {
       font-family: sans-serif;
       display: flex;
@@ -16,7 +24,7 @@ body {
     }
 
     .display {
-      width: 100%;
+      width: 92%;
       height: 50px;
       font-size: 24px;
       text-align: right;
