@@ -8,36 +8,42 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjs@11/lib/browser/math.js"></script>
 </head>
 <body>
-<div class="header">
+<header>
+    <h1> Calculator</h1>
+    <h1> Github</h1>
+    <h1> Author</h1>
+</header>
+<div class="calculator-wrapper">
+    <div class="calculator">
+         <!--<input type="text" class="display" id="display" disabled>-->
+        <input type="text" class="display" id="display" readonly />
+        <div class="buttons">
+            <button id="clearButton">C</button>
+            <button id="backSpaceButton">X</button>
+            <button id="percentageButton">%</button>
+            <button id="divideButton">/</button>
+            <button id="sevenButton" >7</button>
+            <button id="eightButton">8</button>
+            <button id="nineButton">9</button>
+            <button id="multiplyButton">*</button>
 
-</div>
-<div class="calculator">
-  <!--<input type="text" class="display" id="display" disabled>-->
-  <input type="text" class="display" id="display" readonly />
-  <div class="buttons">
-    <button id="clearButton">C</button>
-    <button id="backSpaceButton">X</button>
-    <button id="percentageButton">%</button>
-    <button id="divideButton">/</button>
-    <button id="sevenButton" >7</button>
-    <button id="eightButton">8</button>
-    <button id="nineButton">9</button>
-    <button id="multiplyButton">*</button>
+            <button id="fourButton">4</button>
+            <button id="fiveButton">5</button>
+            <button id="sixButton">6</button>
+            <button id="minusButton">-</button>
 
-    <button id="fourButton">4</button>
-    <button id="fiveButton">5</button>
-    <button id="sixButton">6</button>
-    <button id="minusButton">-</button>
+            <button id="oneButton">1</button>
+            <button id="twoButton">2</button>
+            <button id="threeButton">3</button>
+            <button id="addButton">+</button>
 
-    <button id="oneButton">1</button>
-    <button id="twoButton">2</button>
-    <button id="threeButton">3</button>
-    <button id="addButton">+</button>
+            <button id="decimalButton">.</button>
+            <button id="zeroButton">0</button>
+            <button id="equalButton" class="equal">=</button>
 
-    <button id="decimalButton">.</button>
-    <button id="zeroButton">0</button>
-    <button id="equalButton" class="equal">=</button>
-
+    </div>
+  
+  
     <!--<button onclick="clearDisplay()" class="clear" style="grid-column: span 4;">C</button>-->
   </div>
 </div>
