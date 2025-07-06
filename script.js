@@ -8,6 +8,7 @@ const addButton = document.getElementById("addButton");
 const minusButton = document.getElementById("minusButton");
 const multiplyButton = document.getElementById("multiplyButton");
 const divideButton = document.getElementById("divideButton");
+const decimalButton = document.getElementById("decimalButton");
 
 const zeroButton = document.getElementById("zeroButton");
 const oneButton = document.getElementById("oneButton");
@@ -53,6 +54,13 @@ clearButton.addEventListener("click", () => {
 backSpaceButton.addEventListener("click", () => {
     total = total.slice(0, -1);
     update();
+});
+
+decimalButton.addEventListener("click", () => {
+    if(!total.includes(".")) {
+        total += "."
+        update();
+    }
 });
 
 zeroButton.addEventListener("click", () => {
