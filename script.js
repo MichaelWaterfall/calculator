@@ -9,6 +9,7 @@ const minusButton = document.getElementById("minusButton");
 const multiplyButton = document.getElementById("multiplyButton");
 const divideButton = document.getElementById("divideButton");
 const decimalButton = document.getElementById("decimalButton");
+const percentButton = document.getElementById("percentButton");
 
 const zeroButton = document.getElementById("zeroButton");
 const oneButton = document.getElementById("oneButton");
@@ -23,6 +24,14 @@ const nineButton = document.getElementById("nineButton");
 
 function update() {
     totalDisplay.value = total;
+}
+
+function checkMathSymbol() {
+    console.log(total);
+    if (!total.includes("+")) {
+        console.log("test");
+        update();
+    }
 }
 
 equalButton.addEventListener("click", () => {
@@ -63,6 +72,11 @@ decimalButton.addEventListener("click", () => {
     }
 });
 
+percentButton.addEventListener("click", () => {
+    total += "%";
+    update();
+})
+
 zeroButton.addEventListener("click", () => {
     console.log("0" + total);
     total += "0";
@@ -71,7 +85,7 @@ zeroButton.addEventListener("click", () => {
 
 oneButton.addEventListener("click", () => {
     total += "1";
-    update();
+    checkMathSymbol();
 });
 
 twoButton.addEventListener("click", () => {
@@ -114,4 +128,128 @@ nineButton.addEventListener("click", () => {
     update();
 });
 
+//Keyboard Support
 
+document.addEventListener("keydown", (event) => {
+    if(event.key === "0") {
+        total += "0";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "1") {
+        total += "1";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "1") {
+        total += "1";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "2") {
+        total += "2";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "3") {
+        total += "3";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "4") {
+        total += "4";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "5") {
+        total += "5";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "6") {
+        total += "6";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "7") {
+        total += "7";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "8") {
+        total += "8";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "9") {
+        total += "9";
+        update();
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === ".") {
+        if(!total.includes(".")) {
+            total += "."
+            update();
+        }
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "+") {
+        total += "+";
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "-") {
+        total += "-"
+    }
+})
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "*") {
+        total += "*"
+    }
+})
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "/") {
+        total += "/"
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "=") {
+        const result = math.evaluate(totalDisplay.value);
+        totalDisplay.value = result;
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if(event.key === "Backspace") {
+        total = total.slice(0, -1);
+        update();
+    }
+});
