@@ -1,6 +1,9 @@
 let total = "";
 let currentDisplayValue = "";
 let lastInputWasOperator = false;
+let expression = "";            
+let displayValue = "";          
+let justEvaluated = false;
 
 const totalDisplay = document.getElementById("display");
 
@@ -26,185 +29,111 @@ const eightButton = document.getElementById("eightButton");
 const nineButton = document.getElementById("nineButton");
 
 function update() {
-    totalDisplay.value = currentDisplayValue;
+    totalDisplay.value = displayValue || "";
 }
 
-function checkMathSymbol() {
-    console.log(total);
-    if (!total.includes("+")) {
-        console.log("test");
-        update();
+function inputDigit(digit) {
+    if (justEvaluated) {
+        expression = digit;
+        displayValue = digit;
+        justEvaluated = false;
+    } else {
+        expression += digit;
+        displayValue += digit;
     }
+    update();
 }
 
-equalButton.addEventListener("click", () => {
-    try {
-        const result = math.evaluate(total);
-        total = result.toString(); 
-        totalDisplay.value = result;
-    } catch (err) {
-        totalDisplay.value = "Error";
-        total = "";
+function inputOperator(op) {
+    if (justEvaluated) {
+        justEvaluated = false;
     }
-});
-
-addButton.addEventListener("click", () => {
-    total += "+";
-    lastInputWasOperator = true;
-});
-
-minusButton.addEventListener("click", () => {
-    total += "-";
-    lastInputWasOperator = true;
-});
-
-multiplyButton.addEventListener("click", () => {
-    total += "*";
-    lastInputWasOperator = true;
-});
-
-divideButton.addEventListener("click", () => {
-    total += "/";
-    lastInputWasOperator = true;
-});
-
-clearButton.addEventListener("click", () => {
-    total = "";
-    currentDisplayValue = "";
-    lastInputWasOperator = false;
+    expression += op;
+    displayValue = ""; 
     update();
-});
+}
 
-
-backSpaceButton.addEventListener("click", () => {
-    total = total.slice(0, -1);
-    update();
-});
-
-decimalButton.addEventListener("click", () => {
-    const lastNumber = total.split(/[\+\-\*\/]/).pop();
-    if (!lastNumber.includes(".")) {
-        total += ".";
-        if (lastInputWasOperator) {
-            currentDisplayValue = "0.";
-            lastInputWasOperator = false;
+function inputDecimal() {
+    const currentSegment = expression.split(/[\+\-\*\/]/).pop();
+    if (!currentSegment.includes(".")) {
+        if (justEvaluated) {
+            expression = "0.";
+            displayValue = "0.";
+            justEvaluated = false;
         } else {
-            currentDisplayValue += ".";
+            expression += ".";
+            displayValue += ".";
         }
         update();
     }
-});
+}
 
-
-percentButton.addEventListener("click", () => {
-    total += "%";
-    lastInputWasOperator = true;
-})
-
-zeroButton.addEventListener("click", () => {
-    console.log("0" + total);
-    total += "0";
-    update();
-});
-
-oneButton.addEventListener("click", () => {
-    total += "1";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "1";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "1";
+function evaluate() {
+    try {
+        const result = math.evaluate(expression);
+        expression = result.toString();
+        displayValue = expression;
+        justEvaluated = true;
+        update();
+    } catch (e) {
+        displayValue = "Error";
+        expression = "";
+        justEvaluated = false;
+        update();
     }
-    update();
-});
+}
 
-twoButton.addEventListener("click", () => {
-    total += "2";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "2";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "2";
-    }
+function clearAll() {
+    expression = "";
+    displayValue = "";
+    justEvaluated = false;
     update();
-});
+}
 
-threeButton.addEventListener("click", () => {
-    total += "3";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "3";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "3";
+function backspace() {
+    if (expression.length > 0) {
+        expression = expression.slice(0, -1);
+        displayValue = displayValue.slice(0, -1);
+        justEvaluated = false;
+        update();
     }
-    update();
-});
+}
 
-fourButton.addEventListener("click", () => {
-    total += "4";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "4";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "4";
-    }
-    update();
-});
+function applyPercent() {
+    const parts = expression.split(/([\+\-\*\/])/);
+    const lastPart = parts.pop();
+    const percentValue = (parseFloat(lastPart) / 100).toString();
 
-fiveButton.addEventListener("click", () => {
-    total += "5";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "5";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "5";
-    }
+    parts.push(percentValue);
+    expression = parts.join("");
+    displayValue = percentValue;
+    justEvaluated = false;
     update();
-});
+}
 
-sixButton.addEventListener("click", () => {
-    total += "6";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "6";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "6";
-    }
-    update();
-});
+addButton.addEventListener("click", () => inputOperator("+"));
+minusButton.addEventListener("click", () => inputOperator("-"));
+multiplyButton.addEventListener("click", () => inputOperator("*"));
+divideButton.addEventListener("click", () => inputOperator("/"));
 
-sevenButton.addEventListener("click", () => {
-    total += "7";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "7";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "7";
-    }
-    update();
-});
+decimalButton.addEventListener("click", inputDecimal);
+equalButton.addEventListener("click", evaluate);
+clearButton.addEventListener("click", clearAll);
+backSpaceButton.addEventListener("click", backspace);
+percentButton.addEventListener("click", applyPercent);
 
-eightButton.addEventListener("click", () => {
-    total += "8";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "8";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "8";
-    }
-    update();
-});
 
-nineButton.addEventListener("click", () => {
-    total += "9";
-    if (lastInputWasOperator) {
-        currentDisplayValue = "9";
-        lastInputWasOperator = false;
-    } else {
-        currentDisplayValue += "9";
-    }
-    update();
-});
+zeroButton.addEventListener("click", () => inputDigit("0"));
+oneButton.addEventListener("click", () => inputDigit("1"));
+twoButton.addEventListener("click", () => inputDigit("2"));
+threeButton.addEventListener("click", () => inputDigit("3"));
+fourButton.addEventListener("click", () => inputDigit("4"));
+fiveButton.addEventListener("click", () => inputDigit("5"));
+sixButton.addEventListener("click", () => inputDigit("6"));
+sevenButton.addEventListener("click", () => inputDigit("7"));
+eightButton.addEventListener("click", () => inputDigit("8"));
+nineButton.addEventListener("click", () => inputDigit("9"));
+
 
 //Keyboard Support
 
