@@ -1,4 +1,7 @@
 let total = "";
+let currentDisplayValue = "";
+let lastInputWasOperator = false;
+
 const totalDisplay = document.getElementById("display");
 
 const equalButton = document.getElementById("equalButton");
@@ -23,7 +26,7 @@ const eightButton = document.getElementById("eightButton");
 const nineButton = document.getElementById("nineButton");
 
 function update() {
-    totalDisplay.value = total;
+    totalDisplay.value = currentDisplayValue;
 }
 
 function checkMathSymbol() {
@@ -35,24 +38,34 @@ function checkMathSymbol() {
 }
 
 equalButton.addEventListener("click", () => {
-    const result = math.evaluate(totalDisplay.value);
-    totalDisplay.value = result;
+    try {
+        const result = math.evaluate(total);
+        total = result.toString(); 
+        totalDisplay.value = result;
+    } catch (err) {
+        totalDisplay.value = "Error";
+        total = "";
+    }
 });
 
 addButton.addEventListener("click", () => {
     total += "+";
+    lastInputWasOperator = true;
 });
 
 minusButton.addEventListener("click", () => {
     total += "-";
+    lastInputWasOperator = true;
 });
 
 multiplyButton.addEventListener("click", () => {
     total += "*";
+    lastInputWasOperator = true;
 });
 
 divideButton.addEventListener("click", () => {
     total += "/";
+    lastInputWasOperator = true;
 });
 
 clearButton.addEventListener("click", () => {
@@ -66,15 +79,23 @@ backSpaceButton.addEventListener("click", () => {
 });
 
 decimalButton.addEventListener("click", () => {
-    if(!total.includes(".")) {
-        total += "."
+    const lastNumber = total.split(/[\+\-\*\/]/).pop();
+    if (!lastNumber.includes(".")) {
+        total += ".";
+        if (lastInputWasOperator) {
+            currentDisplayValue = "0.";
+            lastInputWasOperator = false;
+        } else {
+            currentDisplayValue += ".";
+        }
         update();
     }
 });
 
+
 percentButton.addEventListener("click", () => {
     total += "%";
-    update();
+    lastInputWasOperator = true;
 })
 
 zeroButton.addEventListener("click", () => {
@@ -85,46 +106,100 @@ zeroButton.addEventListener("click", () => {
 
 oneButton.addEventListener("click", () => {
     total += "1";
-    checkMathSymbol();
+    if (lastInputWasOperator) {
+        currentDisplayValue = "1";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "1";
+    }
+    update();
 });
 
 twoButton.addEventListener("click", () => {
     total += "2";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "2";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "2";
+    }
     update();
 });
 
 threeButton.addEventListener("click", () => {
     total += "3";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "3";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "3";
+    }
     update();
 });
 
 fourButton.addEventListener("click", () => {
     total += "4";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "4";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "4";
+    }
     update();
 });
 
 fiveButton.addEventListener("click", () => {
     total += "5";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "5";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "5";
+    }
     update();
 });
 
 sixButton.addEventListener("click", () => {
     total += "6";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "6";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "6";
+    }
     update();
 });
 
 sevenButton.addEventListener("click", () => {
     total += "7";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "7";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "7";
+    }
     update();
 });
 
 eightButton.addEventListener("click", () => {
     total += "8";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "8";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "8";
+    }
     update();
 });
 
 nineButton.addEventListener("click", () => {
     total += "9";
+    if (lastInputWasOperator) {
+        currentDisplayValue = "9";
+        lastInputWasOperator = false;
+    } else {
+        currentDisplayValue += "9";
+    }
     update();
 });
 
