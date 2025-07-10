@@ -70,8 +70,11 @@ divideButton.addEventListener("click", () => {
 
 clearButton.addEventListener("click", () => {
     total = "";
+    currentDisplayValue = "";
+    lastInputWasOperator = false;
     update();
 });
+
 
 backSpaceButton.addEventListener("click", () => {
     total = total.slice(0, -1);
