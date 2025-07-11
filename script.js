@@ -15,7 +15,7 @@ const minusButton = document.getElementById("minusButton");
 const multiplyButton = document.getElementById("multiplyButton");
 const divideButton = document.getElementById("divideButton");
 const decimalButton = document.getElementById("decimalButton");
-const percentButton = document.getElementById("percentButton");
+//const percentButton = document.getElementById("percentButton");
 
 const zeroButton = document.getElementById("zeroButton");
 const oneButton = document.getElementById("oneButton");
@@ -99,7 +99,7 @@ function backspace() {
     }
 }
 
-function applyPercent() {
+/*function applyPercent() {
     const parts = expression.split(/([\+\-\*\/])/);
     const lastPart = parts.pop();
     const percentValue = (parseFloat(lastPart) / 100).toString();
@@ -109,7 +109,7 @@ function applyPercent() {
     displayValue = percentValue;
     justEvaluated = false;
     update();
-}
+}*/
 
 addButton.addEventListener("click", () => inputOperator("+"));
 minusButton.addEventListener("click", () => inputOperator("-"));
@@ -120,7 +120,7 @@ decimalButton.addEventListener("click", inputDecimal);
 equalButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clearAll);
 backSpaceButton.addEventListener("click", backspace);
-percentButton.addEventListener("click", applyPercent);
+//percentButton.addEventListener("click", applyPercent);
 
 
 zeroButton.addEventListener("click", () => inputDigit("0"));

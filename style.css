@@ -33,6 +33,13 @@ a {
   width: 260px;
 }
 
+#calculatorText {
+  position: relative;
+  top: 16%;
+  font-size: 33px;
+  
+}
+
 .display {
   width: 100%;
   height: 75px;
