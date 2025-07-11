@@ -138,6 +138,28 @@ nineButton.addEventListener("click", () => inputDigit("9"));
 //Keyboard Support
 
 document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    if (!isNaN(key)) {
+        // Digit keys (0–9)
+        inputDigit(key);
+    } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+        inputOperator(key);
+    } else if (key === "." || key === ",") {
+        inputDecimal();
+    } else if (key === "Enter" || key === "=") {
+        evaluate();
+    } else if (key === "Backspace") {
+        backspace();
+    } else if (key.toLowerCase() === "c") {
+        clearAll();
+    } 
+    else {
+        event.preventDefault();
+    }
+});
+/*
+document.addEventListener("keydown", (event) => {
     if(event.key === "0") {
         total += "0";
         update();
@@ -259,4 +281,4 @@ document.addEventListener("keydown", (event) => {
         total = total.slice(0, -1);
         update();
     }
-});
+});*/
